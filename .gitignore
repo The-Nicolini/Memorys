@@ -1,0 +1,7 @@
+private/config.php
+uploads/
+update-server-deploy/
+adminscripts/
+.mcp.json
+cpadmin_memorys.sql
+.playwright-mcp/

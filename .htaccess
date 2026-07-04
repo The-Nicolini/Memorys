@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Hide .php extension and script name
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
+
+# Let op: er was hier eerder ook een regel die .php-verzoeken doorstuurde
+# naar de extensieloze URL. Die is verwijderd: hij had geen functioneel nut
+# (beide URL-vormen werken al via de regel hierboven) en de "/"-vervanging
+# zorgde voor een foute redirect zodra de site in een submap draait
+# (bv. /memorys/) - een POST naar bestand.php werd dan als GET naar de
+# verkeerde locatie gestuurd (404), o.a. bij het uploaden als gast.

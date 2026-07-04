@@ -1,0 +1,2 @@
+# Deny all access from web to private folder
+Deny from all
