@@ -278,6 +278,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save_selection"])) {
 
 // 3. Verwerk Verwijderen
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_id"])) {
+    $stmt = $conn->prepare("SELECT file_path FROM media WHERE id = :id");
+    $stmt->execute(['id' => $_POST["delete_id"]]);
+    $file_path = $stmt->fetchColumn();
+
+    if (!empty($file_path)) {
+        $uploads_base = realpath(__DIR__ . '/uploads');
+        $abs_path = realpath(__DIR__ . '/' . $file_path);
+        // Alleen verwijderen als het pad daadwerkelijk binnen de uploads-map valt
+        if ($abs_path && $uploads_base && strpos($abs_path, $uploads_base) === 0 && is_file($abs_path)) {
+            unlink($abs_path);
+        }
+    }
+
     $stmt = $conn->prepare("DELETE FROM media WHERE id = :id");
     $stmt->execute(['id' => $_POST["delete_id"]]);
     $message = t('admin_msg_item_deleted');

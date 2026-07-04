@@ -72,7 +72,12 @@ INSERT INTO `settings` (`setting_key`, `value`) VALUES
 ('funeral_mode', '0'),
 ('admin_name', ''),
 ('admin_email', ''),
-('admin_phone', '');
+('admin_phone', ''),
+('install_id', ''),
+('update_last_check', '0'),
+('update_latest_version', ''),
+('update_changelog', ''),
+('update_download_url', '');
 
 -- --------------------------------------------------------
 -- Tabel `login_attempts`
@@ -95,7 +100,6 @@ DROP TABLE IF EXISTS `media`;
 
 CREATE TABLE `media` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `filename` varchar(255) DEFAULT NULL,
   `message_text` text DEFAULT NULL,
   `file_path` varchar(255) DEFAULT NULL,
   `file_type` enum('photo','music','message') NOT NULL,
